@@ -12,6 +12,10 @@ body {
   width: 50%;
 }
 
+#info_imagen{
+  width: 100%;
+}
+
 hr{
 	background: black !important;
 	opacity: 1;

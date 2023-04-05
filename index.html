@@ -339,19 +339,56 @@
         </div>
         <div class="row mb-3">
           <div class="col">
-            <button onclick="graph.change()" class="btn btn-primary">Enviar</button>
+            <button onclick="graph.change()" class="btn btn-primary">
+              Enviar
+            </button>
           </div>
         </div>
       </form>
       <div class="row">
-        <div class="col"><label for="zoom">Rango de Calculo: <span id="range"></span></label><input oninput="update()" type="range" class="form-range" min="1" max="100" step="5" name="zoom" id="zoom"></div>
-        <div class="col"><button onclick="graph.reload();" class="btn btn-primary">Recalcular</button></div>
+        <div class="col">
+          <label for="zoom">Rango de Calculo (Rango en el que se evalúa la ecuación): <span id="range"></span></label
+          ><input
+            oninput="update()"
+            type="range"
+            class="form-range"
+            min="1"
+            max="100"
+            name="zoom"
+            id="zoom"
+          />
+        </div>
+        <div class="col">
+          
+        </div>
       </div>
-      <div id="info">
-        The X axis is red. The Y axis is green. The Z axis is blue.
+      <div class="row">
+        <div class="col">
+          <label for="puntos">Cantidad de puntos (A mayor cantidad de Puntos, mayor precisión, pero mayor tiempo de procesamiento): <span id="range2"></span></label
+          ><input
+            oninput="update()"
+            type="range"
+            class="form-range"
+            min="10"
+            max="1000"
+            step="10"
+            name="puntos"
+            id="puntos"
+          />
+        </div>
+        <div class="col">
+          <button onclick="graph.reload();" disabled id="recalcular" class="btn btn-primary">
+            Recalcular
+          </button>
+        </div>
+      </div>
+      <div id="infoEjes">
+        El eje X+ es rojo. El eje Y+ es verde. El eje Z+ es azul.<br />
+        Grafico:
         <div id="mem"></div>
       </div>
-      <div id="graph"></div>
+      <div class="col" id="graph"></div>
+      <div class="col p-0 card" id="info"></div>
     </div>
     <!--
       <form id="controls" onsubmit="return graph.change()">

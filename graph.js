@@ -16,10 +16,9 @@ var material;
 var mesh1;
 var mesh2;
 
-var memoryInfo = document.getElementById("mem");
 
 function load() {
-
+console.log(PUNTOS, ZOOM);
   // Crear una escena
   scene.clear();
   renderer.dispose();
@@ -28,12 +27,12 @@ function load() {
   graphdiv.appendChild(renderer.domElement);
 
 
-  let cantidadPuntos = 1000;
+  let cantidadPuntos = PUNTOS;
 
   // Crear la geometría personalizada para el paraboloide
-  if(t === "esfera"){
+  if (t === "esfera") {
     geometry1 = geometry2 = new THREE.SphereGeometry(R, 64, 32);
-  }else{
+  } else {
     geometry1 = new ParametricGeometry(f1, cantidadPuntos, cantidadPuntos);
     geometry2 = new ParametricGeometry(f2, cantidadPuntos, cantidadPuntos);
   }
@@ -62,15 +61,10 @@ function load() {
 
   renderer.setClearColor(0xffffff)
   renderer.render(scene, camera);
-  let counter = 0;
 
 
   function animate() {
-    counter++;
-    if (counter % 50 === 0) {
 
-      memoryInfo.innerHTML = window.performance.memory.usedJSHeapSize.toLocaleString();
-    }
     //console.log(window.performance.memory);
     requestAnimationFrame(animate);
     controls.update();
@@ -95,9 +89,13 @@ var FInput = document.getElementsByName("F");
 var GInput = document.getElementsByName("G");
 
 var expInput = document.getElementsByName("exp");
+var recalcular = document.getElementById("recalcular");
 
 t = "elipsoide";
 export function change() {
+  let starttime = (new Date()).getTime();
+
+
   //console.log(AInput, BInput, CInput, DInput, EInput, FInput, GInput);
   if (validar(AInput, BInput, CInput, DInput, EInput, FInput, GInput)) {
 
@@ -164,16 +162,20 @@ export function change() {
       sinInversa.push(G);
 
       t = verificarForma(ecuacion);
-      alert(t);
-      if(t === "desconocido"){
-        alert("La ecuacion "+imprimir(ecuacion)+" no representa una superficie cuádrica");
-      }else{
-        console.log(getInfo(sinInversa, t));
+      if (t === "desconocido") {
+        mostrarInformacion(getInfo(sinInversa, t));
+
+      } else {
+        mostrarInformacion(getInfo(sinInversa, t));
         load();
+
       }
+      let endtime = (new Date()).getTime();
+      console.log("Terminado en ", endtime - starttime, "ms");
+      recalcular.disabled = false;
     }
 
-    
+
 
     return false;
   }
@@ -204,7 +206,7 @@ function inverso(numero) {
 function pasarADenominadores(ecuacion) {
   ecuacion.forEach(element => {
     //console.log("pasa de ", element["value"]);
-    if(!element["lin"])element["value"] = inverso(element["value"]);
+    if (!element["lin"]) element["value"] = inverso(element["value"]);
     //console.log("nuevo elemento", element["value"]);
   });
   return ecuacion;
@@ -265,7 +267,7 @@ function verificarForma(ecuacion) {
   if (cuadraticas.length === 3) {
 
     let [Al, Bl, Cl] = lineales;
-    let insidesqrtRadio = (Al/2)*(Al/2) + (Bl/2)*(Bl/2) + (Cl/2)*(Cl/2) + constante;
+    let insidesqrtRadio = (Al / 2) * (Al / 2) + (Bl / 2) * (Bl / 2) + (Cl / 2) * (Cl / 2) + constante;
     R = Math.sqrt(insidesqrtRadio);
     let [ecX, ecY, ecZ] = cuadraticas;
     //SI TIENE CONSTANTE EN 1
@@ -276,26 +278,26 @@ function verificarForma(ecuacion) {
     //si tiene un denominador negativo, es hiperboloide de 1 hoja
     if (
       ((ecX < 0 && ecY > 0 && ecZ > 0) ||
-      (ecX > 0 && ecY < 0 && ecZ > 0) ||
-      (ecX > 0 && ecY > 0 && ecZ < 0)) &&
+        (ecX > 0 && ecY < 0 && ecZ > 0) ||
+        (ecX > 0 && ecY > 0 && ecZ < 0)) &&
       constante === 1
     ) tipo = "hiperboloide_1_hoja";
     //si tiene 2 denominadores negativos, es hiperboloide de 2 hojas
     if (
       ((ecX < 0 && ecY < 0 && ecZ > 0) ||
-      (ecX > 0 && ecY < 0 && ecZ < 0) ||
-      (ecX < 0 && ecY > 0 && ecZ < 0)) &&
+        (ecX > 0 && ecY < 0 && ecZ < 0) ||
+        (ecX < 0 && ecY > 0 && ecZ < 0)) &&
       constante === 1
     ) tipo = "hiperboloide_2_hojas";
-    
+
     //CONSTANTE = 0
     //mismas condiciones que el hiperboloide de 1 hoja, pero, con la constante = 0
     if (
       ((ecX < 0 && ecY > 0 && ecZ > 0) ||
-      (ecX > 0 && ecY < 0 && ecZ > 0) ||
-      (ecX > 0 && ecY > 0 && ecZ < 0)) &&
+        (ecX > 0 && ecY < 0 && ecZ > 0) ||
+        (ecX > 0 && ecY > 0 && ecZ < 0)) &&
       constante === 0
-    ){
+    ) {
       //console.log("entramos a cono, pq la constante es ",constante, constante===0);
       tipo = "cono_eliptico";
     }
@@ -303,7 +305,7 @@ function verificarForma(ecuacion) {
     A = ecX;
     B = ecY;
     C = ecZ;
-    
+
 
   } else {
     //paraboloides
@@ -326,8 +328,100 @@ function verificarForma(ecuacion) {
 
 }
 var zoom = document.getElementById("zoom");
-
-export function reload(){
+var puntos = document.getElementById("puntos");
+export function reload() {
   ZOOM = zoom.value;
+  PUNTOS = puntos.value;
+  let starttime = (new Date()).getTime();
   load();
+  let endtime = (new Date()).getTime();
+      console.log("Terminado en ", endtime - starttime, "ms");
+}
+var informacionDiv = document.getElementById("info");
+
+export function mostrarInformacion(info) {
+  let title = `<div class="card-header w-100">
+                <h2>Informacion de la superficie</h2>
+              </div>`;
+  let img = `<img src="${info.imagen}" class="card-img-top" id="info_imagen">`;
+  let name = getName(info.nombre);
+  let cardBody = `
+  <div class="card-body">
+         ${name}
+          ${getTexto(info)}
+        </div>
+  `;
+
+  informacionDiv.innerHTML = title + img + cardBody;
+}
+/*
+
+
+        
+        <div class="card-body">
+          
+          <p class="card-text">
+            <b>Centro: </b>(x,y,z)
+          </p>
+        </div>
+
+*/
+function getName(texto) {
+  return `
+  <h2 class="card-title">${texto}</h2>
+  `
+}
+
+function informacionPuntual(tipo, texto) {
+  return `<b>${tipo}:</b> ${texto}<br>`;
+}
+
+function getTexto(info) {
+  let texto;
+
+  switch (t) {
+    case "hiperboloide_1_hoja":
+      texto = informacionPuntual("Eje de Apertura", info.eje_apertura);
+
+      break;
+    case "hiperboloide_2_hojas":
+      texto = informacionPuntual("Eje de Apertura", info.eje_apertura);
+
+      break;
+    case "elipsoide":
+      texto = informacionPuntual("Centro", punto(info.centro));
+      texto += informacionPuntual("Distancia Focal", info.distanciaFocal);
+      texto += informacionPuntual("Foco 1", punto(info.foco1));
+      texto += informacionPuntual("Foco 2", punto(info.foco2));
+      texto += informacionPuntual("Semieje 1", info.semieje1);
+      texto += informacionPuntual("Semieje 2", info.semieje2);
+      texto += informacionPuntual("Semieje 3", info.semieje3);
+      texto += informacionPuntual("Excentricidad", info.excentricidad);
+
+      break;
+    case "esfera":
+      texto = informacionPuntual("Centro", punto(info.centro));
+      texto += informacionPuntual("Radio", info.radio);
+
+      break;
+    case "cono_eliptico":
+      texto = informacionPuntual("Eje de Apertura", info.eje_apertura);
+      break;
+    case "paraboloide_eliptico":
+      texto = informacionPuntual("Eje de Apertura", info.eje_apertura);
+      break;
+    case "paraboloide_hiperbolico":
+      texto = informacionPuntual("Eje de Apertura", info.eje_apertura);
+      break;
+    default:
+      texto = informacionPuntual("Causa", info.p);
+      break;
+  }
+  return `<p class="card-text">
+            ${texto}
+          </p>`;
+}
+
+function punto(punto) {
+  return `(${punto.x}, ${punto.y}, ${punto.z})`;
 }

@@ -4,6 +4,7 @@ var B = 1;
 var C = 1;
 var R = 1;
 var ZOOM = 10;
+var PUNTOS = 1000;
 var quads = {}
 var wireframe = true;
 
@@ -11,8 +12,7 @@ function getInfo(ecuacion, t) {
     let cuadraticas = []
     let lineales = []
     let constante;
-    let nombre;
-    console.log(ecuacion);
+    //console.log(ecuacion);
 
     for (let index = 0; index < ecuacion.length; index++) {
         const element = ecuacion[index];
@@ -22,7 +22,7 @@ function getInfo(ecuacion, t) {
     }
 
     var info = {};
-
+    info.imagen = `img/${t}.png`;
 
     if (cuadraticas.length === 3) {
 
@@ -30,13 +30,29 @@ function getInfo(ecuacion, t) {
         let [ecX, ecY, ecZ] = cuadraticas;
         switch (t) {
             case "hiperboloide_1_hoja":
-                nombre = "Hiperboloide de 1 hoja";
+                info.nombre = "Hiperboloide de 1 hoja";
+                
+                if(ecX < 0){
+                    info.eje_apertura = "X";
+                }else if(ecY < 0){
+                    info.eje_apertura = "Y";
+                }else{
+                    info.eje_apertura = "Z";
+                }
+                
                 break;
             case "hiperboloide_2_hojas":
-                nombre = "Hiperboloide de 2 hojas";
+                info.nombre = "Hiperboloide de 2 hojas";
+                if(ecX > 0){
+                    info.eje_apertura = "X";
+                }else if(ecY > 0){
+                    info.eje_apertura = "Y";
+                }else{
+                    info.eje_apertura = "Z";
+                }
                 break;
             case "elipsoide":
-                nombre = "Elipsoide";
+                info.nombre = "Elipsoide";
                 info.centro = {}
                 info.foco1 = {}
                 info.foco2 = {}
@@ -95,17 +111,67 @@ function getInfo(ecuacion, t) {
                 info.centro.z = -Cl / 2;
                 break;
             case "cono_eliptico":
-                nombre = "Cono eliptico";
+                info.nombre = "Cono eliptico";
+                if(ecX < 0){
+                    info.eje_apertura = "X";
+                }else if(ecY < 0){
+                    info.eje_apertura = "Y";
+                }else{
+                    info.eje_apertura = "Z";
+                }
                 break;
             default:
-                nombre = "desconocido";
+                info.nombre = "Superficie Desconocida";
+                info.p = "La ecuacion dada no corresponde a una ecuacion cuadrica";
                 break;
-
         }
     } else {
         //paraboloides
         let [ecA, ecB] = cuadraticas;
         let lineal = lineales[0];
+        switch (t) {
+            case "paraboloide_eliptico":
+                info.nombre = "Paraboloide Eliptico";
+                if (quads.x["exp"] === 1) {
+                    
+                    if (lineal < 0) info.eje_apertura = "+X";
+                    else info.eje_apertura = "-X";
+                }
+            
+                if (quads.y["exp"] === 1) {
+                   
+                    if (lineal < 0) info.eje_apertura = "+Y";
+                    else info.eje_apertura = "-Y";
+                }
+            
+                if (quads.z["exp"] === 1) {
+                   
+                    if (lineal < 0) info.eje_apertura = "+Z";
+                    else info.eje_apertura = "-Z";
+                }
+                break;
+            case "paraboloide_hiperbolico":
+                info.nombre = "Paraboloide Hiperbolico";
+                if (quads.x["exp"] === 1) {
+                    
+                    info.eje_apertura = "X";
+                }
+            
+                if (quads.y["exp"] === 1) {
+                   
+                    info.eje_apertura = "Y";
+                }
+            
+                if (quads.z["exp"] === 1) {
+                   
+                    info.eje_apertura = "Z";
+                }
+                break;
+            default:
+                info.nombre = "Superficie Desconocida";
+                info.p = "La ecuacion dada no corresponde a una ecuacion cuadrica";
+                break;
+        }
         //si los denominadores son positivos, paraboloide eliptico
         if (ecA > 0 && ecB > 0) tipo = "paraboloide_eliptico";
         //si tiene un denominador negativo, paraboloide hiperbolico
