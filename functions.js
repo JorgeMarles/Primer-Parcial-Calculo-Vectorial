@@ -115,7 +115,7 @@ const elipsoide = function (a, b, c, sign, u, v) {
         x = u;
         y = v;
         c *= sign;
-        let insidesqrt = (a * a * b * c) - (x * x * b * b) - (y * y * a * a);
+        let insidesqrt = (a * a * b * b) - (x * x * b * b) - (y * y * a * a);
         z = c * Math.sqrt(insidesqrt) / (a * b);
     }
     //console.log(a, b, c);

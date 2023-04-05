@@ -1,3 +1,15 @@
+/**
+ * 
+ * Autores:
+Jorge Andres Marles Florez - 1152255
+Karen Lizeth Quintero Villasmil - 1152250
+Danny Valentina Sánchez Barrera - 1193143
+Darwin Andres Perez Patiarroyo - 1193116
+Hoower Walvindon Adip Pallares Rangel - 1193151
+ * 
+ * 
+ */
+
 import * as THREE from 'three';
 import { ParametricGeometry } from 'three/addons/geometries/ParametricGeometry.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -171,7 +183,7 @@ export function change() {
 
       }
       let endtime = (new Date()).getTime();
-      console.log("Terminado en ", endtime - starttime, "ms");
+      console.log("Terminado en", endtime - starttime, "ms");
       recalcular.disabled = false;
     }
 

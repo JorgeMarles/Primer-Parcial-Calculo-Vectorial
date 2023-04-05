@@ -324,7 +324,7 @@
             </div>
             <!--termino.end-->
           </div>
-          <div class="col-1 p-0">
+          <div class="col-1 p-0" style="width: 4.5%">
             <!--termino.start-->
 
             <div class="row mb-3">
@@ -347,7 +347,9 @@
       </form>
       <div class="row">
         <div class="col">
-          <label for="zoom">Rango de Calculo (Rango en el que se evalúa la ecuación): <span id="range"></span></label
+          <label for="zoom"
+            >Rango de Calculo (Rango en el que se evalúa la ecuación):
+            <span id="range"></span></label
           ><input
             oninput="update()"
             type="range"
@@ -358,13 +360,14 @@
             id="zoom"
           />
         </div>
-        <div class="col">
-          
-        </div>
+        <div class="col"></div>
       </div>
       <div class="row">
         <div class="col">
-          <label for="puntos">Cantidad de puntos (A mayor cantidad de Puntos, mayor precisión, pero mayor tiempo de procesamiento): <span id="range2"></span></label
+          <label for="puntos"
+            >Cantidad de puntos (A mayor cantidad de Puntos, mayor precisión,
+            pero mayor tiempo de procesamiento):
+            <span id="range2"></span></label
           ><input
             oninput="update()"
             type="range"
@@ -377,7 +380,12 @@
           />
         </div>
         <div class="col">
-          <button onclick="graph.reload();" disabled id="recalcular" class="btn btn-primary">
+          <button
+            onclick="graph.reload();"
+            disabled
+            id="recalcular"
+            class="btn btn-primary"
+          >
             Recalcular
           </button>
         </div>
@@ -389,6 +397,22 @@
       </div>
       <div class="col" id="graph"></div>
       <div class="col p-0 card" id="info"></div>
+    </div>
+    <div style="width: 100%; text-align: center">
+      <br><b>Autores:</b><br>
+      Jorge Andres Marles Florez - 1152255<br />
+      Karen Lizeth Quintero Villasmil - 1152250<br />
+      Danny Valentina Sánchez Barrera - 1193143<br />
+      Darwin Andres Perez Patiarroyo - 1193116<br />
+      Hoower Walvindon Adip Pallares Rangel - 1193151
+      <br>
+      <br>
+      <b>Materia:</b>
+      Cálculo Vectorial
+      <br>
+      Universidad Francisco de Paula Santander
+      <br>
+      2023-I
     </div>
     <!--
       <form id="controls" onsubmit="return graph.change()">
