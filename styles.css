@@ -1,0 +1,33 @@
+body {
+  margin: 10px;
+}
+
+#graph {
+  width: 700px;
+  height: 500px;
+}
+
+#controls {
+  position: relative;
+  width: 50%;
+}
+
+hr{
+	background: black !important;
+	opacity: 1;
+}
+
+input[type="number"].no-spinner::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.exponent{
+	width: 40%;
+}
+
+.literal{
+	display: flex;
+	align-items: end;
+}

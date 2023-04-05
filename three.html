@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.151.2/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.151.2/examples/jsm/"
+        }
+      }
+    </script>
+    <script src="vars.js"></script>
+    <script type="text/javascript">
+      const graph = {};
+    </script>
+    <script type="module">
+      import { change, reload } from "./graph.js";
+      graph.change = change;
+      graph.reload = reload;
+    </script>
+    <script src="controls.js" defer></script>
+
+    <script type="module" src="graph.js"></script>
+    <script src="functions.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="row m-0">
+      Ecuacion:
+      <form onsubmit="return false" name="equation">
+        <div class="row me-0">
+          <div class="col p-0">
+            <!--termino.start-->
+            <div class="input-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="card bg-light">
+                    <div class="row">
+                      <div class="col pe-0">
+                        <div class="btn-group-vertical my-2 ms-2">
+                          <input
+                            type="number"
+                            required
+                            name="A"
+                            class="form-control no-spinner"
+                          />
+                          <hr class="my-1 bg-dark w-100" />
+                          <input
+                            type="number"
+                            required
+                            name="A"
+                            value="1"
+                            class="form-control no-spinner"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col d-flex justify-content-between">
+                        <div class="fs-1 literal">X</div>
+                        <input
+                          type="number"
+                          required
+                          name="exp"
+                          value="2"
+                          class="form-control no-spinner m-2 w-50 h-50 exponent bg-light"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--termino.end-->
+          </div>
+          <div class="col p-0">
+            <!--termino.start-->
+            <div class="input-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="card bg-light">
+                    <div class="row">
+                      <div class="col-1 d-flex align-items-center fs-1">+</div>
+                      <div class="col pe-0">
+                        <div class="btn-group-vertical my-2 ms-2">
+                          <input
+                            type="number"
+                            required
+                            name="B"
+                            class="form-control no-spinner"
+                          />
+                          <hr class="my-1 bg-dark w-100" />
+                          <input
+                            type="number"
+                            required
+                            name="B"
+                            value="1"
+                            class="form-control no-spinner"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col d-flex justify-content-between">
+                        <div class="fs-1 literal">Y</div>
+                        <input
+                          type="number"
+                          required
+                          name="exp"
+                          value="2"
+                          class="form-control no-spinner m-2 w-50 h-50 exponent bg-light"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--termino.end-->
+          </div>
+          <div class="col p-0">
+            <!--termino.start-->
+            <div class="input-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="card bg-light">
+                    <div class="row">
+                      <div class="col-1 d-flex align-items-center fs-1">+</div>
+
+                      <div class="col pe-0">
+                        <div class="btn-group-vertical my-2 ms-2">
+                          <input
+                            type="number"
+                            required
+                            name="C"
+                            class="form-control no-spinner"
+                          />
+                          <hr class="my-1 bg-dark w-100" />
+                          <input
+                            type="number"
+                            required
+                            name="C"
+                            value="1"
+                            class="form-control no-spinner"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col d-flex justify-content-between">
+                        <div class="fs-1 literal">Z</div>
+                        <input
+                          type="number"
+                          required
+                          name="exp"
+                          value="2"
+                          class="form-control no-spinner m-2 w-50 h-50 exponent bg-light"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--termino.end-->
+          </div>
+          <div class="col p-0">
+            <!--termino.start-->
+            <div class="input-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="card bg-light">
+                    <div class="row">
+                      <div class="col-1 d-flex align-items-center fs-1">+</div>
+                      <div class="col pe-0">
+                        <div class="btn-group-vertical my-2 ms-2">
+                          <input
+                            type="number"
+                            required
+                            name="D"
+                            class="form-control no-spinner"
+                          />
+                          <hr class="my-1 bg-dark w-100" />
+                          <input
+                            type="number"
+                            required
+                            name="D"
+                            value="1"
+                            class="form-control no-spinner"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-4 d-flex align-items-center">
+                        <div class="fs-1">X</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--termino.end-->
+          </div>
+          <div class="col p-0">
+            <!--termino.start-->
+            <div class="input-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="card bg-light">
+                    <div class="row">
+                      <div class="col-1 d-flex align-items-center fs-1">+</div>
+                      <div class="col pe-0">
+                        <div class="btn-group-vertical my-2 ms-2">
+                          <input
+                            type="number"
+                            required
+                            name="E"
+                            class="form-control no-spinner"
+                          />
+                          <hr class="my-1 bg-dark w-100" />
+                          <input
+                            type="number"
+                            required
+                            name="E"
+                            value="1"
+                            class="form-control no-spinner"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-4 d-flex align-items-center">
+                        <div class="fs-1">Y</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--termino.end-->
+          </div>
+          <div class="col p-0">
+            <!--termino.start-->
+            <div class="input-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="card bg-light">
+                    <div class="row">
+                      <div class="col-1 d-flex align-items-center fs-1">+</div>
+                      <div class="col pe-0">
+                        <div class="btn-group-vertical my-2 ms-2">
+                          <input
+                            type="number"
+                            required
+                            name="F"
+                            class="form-control no-spinner"
+                          />
+                          <hr class="my-1 bg-dark w-100" />
+                          <input
+                            type="number"
+                            required
+                            name="F"
+                            value="1"
+                            class="form-control no-spinner"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-4 d-flex align-items-center">
+                        <div class="fs-1">Z</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--termino.end-->
+          </div>
+          <div class="col p-0">
+            <!--termino.start-->
+            <div class="input-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="card bg-light">
+                    <div class="row">
+                      <div class="col-1 d-flex align-items-center fs-1">+</div>
+                      <div class="col pe-3">
+                        <div class="btn-group-vertical m-2">
+                          <input
+                            type="number"
+                            required
+                            name="G"
+                            class="form-control no-spinner"
+                          />
+                          <hr class="my-1 bg-dark w-100" />
+                          <input
+                            type="number"
+                            required
+                            name="G"
+                            value="1"
+                            class="form-control no-spinner"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--termino.end-->
+          </div>
+          <div class="col-1 p-0">
+            <!--termino.start-->
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="row h-100 mb-4">
+                  <div class="col d-flex align-items-center fs-1">= 0</div>
+                </div>
+              </div>
+              <!--termino.end-->
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <button onclick="graph.change()" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col"><label for="zoom">Rango de Calculo: <span id="range"></span></label><input oninput="update()" type="range" class="form-range" min="1" max="100" step="5" name="zoom" id="zoom"></div>
+        <div class="col"><button onclick="graph.reload();" class="btn btn-primary">Recalcular</button></div>
+      </div>
+      <div id="info">
+        The X axis is red. The Y axis is green. The Z axis is blue.
+        <div id="mem"></div>
+      </div>
+      <div id="graph"></div>
+    </div>
+    <!--
+      <form id="controls" onsubmit="return graph.change()">
+        <div class="row">
+          <label for="a" class="col">
+            A:
+          </label>
+          <div class="col" id="a_val">0</div>
+          <div class="col-md-10">
+            <input type="range" oninput="update()" value="A" class="form-range" id="a" min="-5" max="5" step="0.01"/>
+          </div>
+          
+        </div>
+        <div class="row">
+          <label for="b" class="col">
+            B:
+          </label>
+          <div class="col" id="b_val">0</div>
+          <div class="col-md-10">
+            <input type="range" oninput="update()" class="form-range" id="b" min="-5" max="5" step="0.01"/>
+          </div>
+          
+        </div>
+        <div class="row">
+          <label for="c" class="col">
+            C:
+          </label>
+          <div class="col" id="c_val">0</div>
+          <div class="col-md-10">
+            <input type="range" oninput="update()" class="form-range" id="c" min="-5" max="5" step="0.01"/>
+          </div>
+          
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-sm-10 offset-sm-2">
+            <div class="form-check">
+              <label class="form-check-label" for="wireframe">
+                WireFrame
+              </label>
+              <input checked class="form-check-input" type="checkbox" id="wireframe" />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Cargar</button>
+      </form>
+      -->
+  </body>
+</html>
