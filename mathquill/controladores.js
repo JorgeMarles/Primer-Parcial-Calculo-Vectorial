@@ -136,7 +136,7 @@ function show() {
     }
     let dividida = dividir();
     tipo = verificarForma(dividida);
-    console.log(dividida);
+    //console.log(dividida);
     mostrarInformacion(getInfo(values, tipo))
 
     let elemento = document.querySelector("#ggb-element");
@@ -298,7 +298,7 @@ function getInfo(ecuacion, t) {
     //console.log(ecuacion);
     var info = {};
     info.imagen = `img/${t}.png`;
-
+    //console.log("antes de los if",cuadraticas);
     if (cuadraticas.length === 3) {
 
         let [Al, Bl, Cl] = lineales;
@@ -408,9 +408,10 @@ function getInfo(ecuacion, t) {
         let [ecA, ecB, ecC] = cuadraticas;
         let [elG, elH, elI] = lineales;
         let lineal;
-        if (ecA === 0) lineal = elG;
-        if (ecB === 0) lineal = elH;
-        if (ecC === 0) lineal = elI;
+        if (ecA === undefined) lineal = elG;
+        if (ecB === undefined) lineal = elH;
+        if (ecC === undefined) lineal = elI;
+
         switch (t) {
             case "paraboloide_eliptico":
                 info.nombre = "Paraboloide Eliptico";
