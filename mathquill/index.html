@@ -14,7 +14,7 @@
     <script src="vars.js"></script>
     <script src="Calc.js"></script>
     <script src="controladores.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -27,29 +27,41 @@
       crossorigin="anonymous"
     ></script>
 
-
     <script src="https://www.geogebra.org/apps/deployggb.js"></script>
   </head>
   <body class="m-2">
-    <p><span class="mathquilll" id="ecuacion"></span></p>
-    
+    <h4>Ecuacion General:</h4>
+    <p>
+      <span class="mathquilll" id="ecuacion"
+        >Ax^2+By^2+Cz^2+Dxy+Exz+Fyz+Gx+Hy+Iz=J</span
+      >
+    </p>
+
     <button class="btn btn-primary" onclick="show()">aas</button>
-    
-    <table>
+
+    <table class="w-100 table" id="tabla">
       <tr>
-        <td>A: <span class="valor" id="A"></span></td>
-        <td>B: <span class="valor" id="B"></span></td>
-        <td>C: <span class="valor" id="C"></span></td>
-        <td>D: <span class="valor" id="D"></span></td>
-        <td>E: <span class="valor" id="E"></span></td>
+        <td>A: <span class="valor w-100" id="A">1</span></td>
+        <td>B: <span class="valor w-100" id="B">1</span></td>
+        <td>C: <span class="valor w-100" id="C">1</span></td>
+        <td>D: <span class="valor w-100" id="D">0</span></td>
+        <td>E: <span class="valor w-100" id="E">0</span></td>
       </tr>
-        <td>F: <span class="valor" id="F"></span></td>
-        <td>G: <span class="valor" id="G"></span></td>
-        <td>H: <span class="valor" id="H"></span></td>
-        <td>I: <span class="valor" id="I"></span></td>
-        <td>J: <span class="valor" id="J"></span></td>
+      <tr>
+        <td>F: <span class="valor w-100" id="F">0</span></td>
+        <td>G: <span class="valor w-100" id="G">0</span></td>
+        <td>H: <span class="valor w-100" id="H">0</span></td>
+        <td>I: <span class="valor w-100" id="I">0</span></td>
+        <td>J: <span class="valor w-100" id="J">1</span></td>
       </tr>
     </table>
-    <div id="ggb-element"></div> 
+    <div class="row">
+      <div class="col">
+        <div id="ggb-element"></div>
+      </div>
+      <div class="col">
+        <div class="p-0 card" id="info"></div>
+      </div>
+    </div>
   </body>
 </html>
