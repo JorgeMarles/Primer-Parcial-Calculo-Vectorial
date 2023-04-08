@@ -9,9 +9,9 @@ $(function () {
     //console.log(answerMathField);
 
 
-    for (let index = 65; index <= 74; index++) {
+    for (let index = 65; index <= 71; index++) {
         var element = document.getElementById(String.fromCharCode(index));
-        arregloSpans.push(element)
+        if(element !== null) arregloSpans.push(element)
     }
 
     var letrasAnterior = 0;
@@ -109,7 +109,7 @@ function convertirEcuacion() {
 
 function dividir() {
     let resultado = JSON.parse(JSON.stringify(values));
-    let divisor = resultado[9];
+    let divisor = resultado[6];
 
     if (divisor === 0) {
         return resultado;
@@ -117,7 +117,7 @@ function dividir() {
     for (let index = 0; index < resultado.length - 1; index++) {
         resultado[index] = values[index] / divisor;
     }
-    resultado[9] /= divisor;
+    resultado[6] /= divisor;
 
     return resultado;
 }
@@ -184,9 +184,8 @@ function validarCuadraticas() {
 function verificarForma(ecuacion) {
     //console.log(ecuacion);
     let cuadraticas = [];
-    let dobleVariable = [];
     let lineales = [];
-    let constante = ecuacion[9];
+    let constante = ecuacion[6];
 
 
 
@@ -195,12 +194,9 @@ function verificarForma(ecuacion) {
         if (element !== 0) cuadraticas.push(element);
     }
 
-    for (let index = 3; index < 6; index++) {
-        const element = ecuacion[index];
-        if (element !== 0) dobleVariable.push(element);
-    }
+   
 
-    for (let index = 6; index < 9; index++) {
+    for (let index = 3; index < 6; index++) {
         const element = ecuacion[index];
         lineales.push(element);
     }
@@ -275,9 +271,8 @@ function verificarForma(ecuacion) {
 
 function getInfo(ecuacion, t) {
     let cuadraticas = [];
-    let dobleVariable = [];
     let lineales = [];
-    let constante = ecuacion[9];
+    let constante = ecuacion[6];
 
 
 
@@ -286,12 +281,8 @@ function getInfo(ecuacion, t) {
         if (element !== 0) cuadraticas.push(element);
     }
 
+    
     for (let index = 3; index < 6; index++) {
-        const element = ecuacion[index];
-        if (element !== 0) dobleVariable.push(element);
-    }
-
-    for (let index = 6; index < 9; index++) {
         const element = ecuacion[index];
         lineales.push(element);
     }
