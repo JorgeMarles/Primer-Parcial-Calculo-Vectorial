@@ -126,7 +126,6 @@ function show() {
     let dividida = dividir();
     tipo = verificarForma(dividida);
     console.log(tipo);
-    alert(tipo)
     //console.log(dividida);
     mostrarInformacion(tipo)
 
